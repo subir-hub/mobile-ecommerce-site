@@ -1,0 +1,8 @@
+*.php linguist-detectable=true
+*.js linguist-detectable=false
+*.css linguist-detectable=false
+*.scss linguist-detectable=false
+*.html linguist-detectable=false
+*.htm linguist-detectable=false
+*.json linguist-detectable=false
+*.hack linguist-detectable=false
