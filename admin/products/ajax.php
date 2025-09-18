@@ -48,7 +48,6 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'updateProduct') {
 
     $fileName = "";
 
-    // Handle new image upload (optional)
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $file = $_FILES['image'];
         $fileName = $file['name'];
@@ -91,7 +90,6 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'delete') {
 
     $id = $_REQUEST['id'];
 
-    // Step 1: Get the current image name
     $imgSql = "SELECT image FROM products WHERE id = ?";
     $stmt = $conn->prepare($imgSql);
     $stmt->bind_param("i", $id);
@@ -102,13 +100,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'delete') {
     if ($fetchImg) {
         $imgFile = $fetchImg['image'];
 
-        // Step 2: Delete product from DB
         $deleteSql = "DELETE FROM products WHERE id = ?";
         $dlt = $conn->prepare($deleteSql);
         $dlt->bind_param("i", $id);
 
         if ($dlt->execute()) {
-            // Step 3: Delete image file if exists
             $filePath = "../uploads/" . $imgFile;
             if (file_exists($filePath)) {
                 unlink($filePath);
